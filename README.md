@@ -20,7 +20,8 @@ Install
 1. Copy '99-screenconfig.rules' to '/etc/udev/rules.d/'
 2. Copy 'screenconfig.sh' to '/etc/udev/scripts/' (which may not exist, in this case create it)
 3. Set appropriate acl on 'screenconfig.sh', e.g. 'chmod 744 /etc/udev/scripts/screenconfig.sh'
-4. Reload udev with '/etc/init.d/udev reload'
+4. Modify 'screenconfig.sh' according to your needs, especially modify the 'USER' variable.
+5. Reload udev with '/etc/init.d/udev reload'
 
 Example
 -------
