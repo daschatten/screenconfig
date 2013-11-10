@@ -26,28 +26,31 @@ Install
 Example
 -------
 
-The included example checks 3 outputs (HDMI/DVI, VGA and LVDS (Notebook included display) and works as follows:
+The included example checks 3 outputs (HDMI/DVI, VGA and LVDS (Notebook included display)) and works as follows:
 
 * HDMI and VGA and LVDS are connected
-* * LVDS is deactivated
-* * HDMI is positioned right of VGA
+*    LVDS is deactivated
+*    HDMI and VGA are activated
+*    HDMI is positioned right of VGA
 * HDMI and LVDS are connected
-* * VGA is deactivated
-* * HDMI is positioned right of LVDS
+*    VGA is deactivated
+*    HDMI and LVDS are activated
+*    HDMI is positioned right of LVDS
 * VGA and LVDS are connected
-* * HDMI is deactivated
-* * VGA is positioned right of LVDS
+*    HDMI is deactivated
+*    VGA and LVDS are activated
+*    VGA is positioned right of LVDS
 * Only LVDS is connected
-* * HDMI and VGA are deactivated
-* * LVDS is activated
+*    HDMI and VGA are deactivated
+*    LVDS is activated
 
 Note
 ----
 
 * Each time the udev event 'drm' is triggered the screen positioning will be executed. This event is triggered when
-* * A display is connected
-* * A display is disconnected
-* * After waking up from a suspend mode
+*    A display is connected
+*    A display is disconnected
+*    After waking up from a suspend mode
 * Screen repositioning can be manually triggered by executing '/etc/udev/scripts/screenconfig.sh'
 
 Planned Features
