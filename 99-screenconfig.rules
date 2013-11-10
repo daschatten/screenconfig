@@ -1,0 +1,1 @@
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/etc/udev/scripts/screenconfig.sh"
