@@ -31,18 +31,22 @@ The included example checks 3 outputs (HDMI/DVI, VGA and LVDS (Notebook included
 * HDMI and VGA and LVDS are connected
     * LVDS is deactivated
     * HDMI and VGA are activated
-    * HDMI is positioned right of VGA
+    * HDMI is positioned right of VGA, HDMI is primary
 * HDMI and LVDS are connected
     * VGA is deactivated
     * HDMI and LVDS are activated
-    * HDMI is positioned right of LVDS
+    * HDMI is positioned right of LVDS, HDMI is primary
+* VGA and LVDS are connected, VGA has EDID name of EPSON|BENQ
+    * HDMI is deactivated
+    * VGA and LVDS are activated, LVDS is primary
+    * VGA is positioned right of LVDS
 * VGA and LVDS are connected
     * HDMI is deactivated
     * VGA and LVDS are activated
-    * VGA is positioned right of LVDS
+    * VGA is positioned right of LVDS, VGA is primary
 * Only LVDS is connected
     * HDMI and VGA are deactivated
-    * LVDS is activated
+    * LVDS is activated, LVDS is primary
 
 Note
 ----

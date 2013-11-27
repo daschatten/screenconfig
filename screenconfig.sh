@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# set pattern matching case insensitive
+shopt -s nocasematch;
+
 
 # output names extracted from 'xrandr -q'
 IN="LVDS1"
@@ -12,8 +15,11 @@ export XAUTHORITY=/home/$USER/.Xauthority
 export DISPLAY=:0.0
 
 statusIN="$(cat /sys/class/drm/card0-LVDS-1/status)"
+edidIN="$(cat /sys/class/drm/card0-LVDS-1/edid)"
 statusEXT1="$(cat /sys/class/drm/card0-VGA-1/status)"
+edidEXT1="$(cat /sys/class/drm/card0-VGA-1/edid)"
 statusEXT2="$(cat /sys/class/drm/card0-HDMI-A-3/status)"
+edidEXT2="$(cat /sys/class/drm/card0-HDMI-A-3/edid)"
 
 if ( ( [ "${statusEXT1}" = "connected" ] ) && ( [ "${statusEXT2}" = "connected" ] ))
 then
@@ -21,6 +27,13 @@ then
     xrandr --output $IN --off
     xrandr --output $EXT1 --auto
     xrandr --output $EXT2 --auto --right-of $EXT1 --primary
+elif ( ( [ "${statusEXT1}" = "connected" ] ) && ( [[ "${edidEXT1}" =~ EPSON|BENQ ]] ) )
+then
+    echo "Found one external output with name 'EPSON|BENQ': '$EXT1'"
+    xrandr --output $EXT2 --off
+    xrandr --output $IN --auto --primary
+    xrandr --output $EXT1 --auto --above $IN
+
 elif ( [ "${statusEXT1}" = "connected" ] )
 then
     echo "Found one external output: '$EXT1'"
