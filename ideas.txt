@@ -1,0 +1,9 @@
+some ideas for further development
+
+
+* add configuration file support
+* add helper script: create template from current display layout
+* add helper script: edit current layout
+* add helper hook: output notification to windowmanager when layout changes
+* add helper script: manual layout selection
+
