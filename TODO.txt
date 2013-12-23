@@ -1,0 +1,2 @@
+* finish debianization
+* invent configuration files and templates
