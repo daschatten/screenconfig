@@ -58,9 +58,9 @@ update-doc:
 
 install: clean update-doc 
 	@echo "installing $(PNAME) $(VERSION).$(RELEASE)-$(REVISION)"
-	mkdir -p $(INST_BINDIR)
-	mkdir -p $(INST_SBINDIR)
-	mkdir -p $(INST_ETCDIR)
+	#mkdir -p $(INST_BINDIR)
+	#mkdir -p $(INST_SBINDIR)
+	#mkdir -p $(INST_ETCDIR)
 	#install -g root -o root -m 755 bin/kvmtool $(INST_SBINDIR)/
 	#perl -p -i -e "s/^VERSION=noversion/VERSION='$(VERSION).$(RELEASE)-$(REVISION)'/" $(INST_SBINDIR)/screenconfig
 	#
