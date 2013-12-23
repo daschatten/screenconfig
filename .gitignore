@@ -1,1 +1,6 @@
 *.swp
+debian/files
+debian/screenconfig.debhelper.log
+debian/screenconfig.substvars
+debian/screenconfig/
+
