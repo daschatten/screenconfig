@@ -1,0 +1,15 @@
+Source: screenconfig
+Section: unknown
+Priority: extra
+Maintainer: Florian Bittner <florian.bittner@mawoh.de>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Homepage: https://github.com/daschatten/screenconfig
+#Vcs-Git: git://git.debian.org/collab-maint/screenconfig.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/screenconfig.git;a=summary
+
+Package: screenconfig
+Architecture: all
+Depends: ${misc:Depends}, x11-xserver-utils, udev
+Description: An automatic display configurator that uses udev
+ Screenconfig automatically sets up your displays as soon as they are connected. You create rulesets and define, what shall happen after a specific display has been connected or disconnected.

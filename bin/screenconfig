@@ -3,6 +3,7 @@
 # set pattern matching case insensitive
 shopt -s nocasematch;
 
+VERSION=noversion
 
 # output names extracted from 'xrandr -q'
 IN="LVDS1"
