@@ -1,2 +1,45 @@
 * finish debianization
 * invent configuration files and templates
+* add configuration file support
+* add helper mode: create template from current display layout
+* add helper mode: show currently matching layout
+* add helper hook: output notification to windowmanager when layout changes
+* add helper script: manual layout selection
+
+* config file shall look like this:
+
+<screenid>/<regexp>/ <screenid>/<regexp>/ ...
+<xrandr arguments>
+<xrandr arguments>
+...
+
+e.g.
+
+# template names:
+# $NAME = is <screenid>/regexp/
+
+$IN=LVDS1//
+$EXT1=VGA1/fuji/
+$EXT2=HDMI3/benq/
+
+# %NAME is automatically generated from $NAME
+# it only holds the screenid, the regexp is removed
+
+# exact rule: specific monitors are connected
+$IN $EXT1 $EXT2
+%IN   --off
+%EXT1 --auto
+%EXT2 --auto --right-of %EXT1 --primary
+
+# more generic rule:
+# there is something connected to EXT1
+$IN %EXT1
+%IN --auto --primary
+%EXT1 --auto
+
+# $IN is connected, ignoring something on other ports
+$IN 
+%IN --auto
+%EXT1 --off
+%EXT2 --off
+
