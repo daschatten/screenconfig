@@ -19,7 +19,7 @@ SBINDIR = $(USRPREFIX)/sbin
 LIBDIR  = $(USRPREFIX)/lib/$(PNAME)
 VARLIBDIR  = /var/lib/$(PNAME)
 ETCDIR  = /etc/$(PNAME)
-RULESDIR= /etc/udev/rules.d/
+RULESDIR= /lib/udev/rules.d
 
 INST_BINDIR   = $(DESTDIR)/$(BINDIR)
 INST_SBINDIR  = $(DESTDIR)/$(SBINDIR)
@@ -60,33 +60,16 @@ update-doc:
 
 install: clean update-doc 
 	@echo "installing $(PNAME) $(VERSION).$(RELEASE)-$(REVISION)"
-	#mkdir -p $(INST_BINDIR)
-	#mkdir -p $(INST_SBINDIR)
-	#mkdir -p $(INST_ETCDIR)
 	mkdir -p $(INST_RULESDIR)
-	#install -g root -o root -m 755 bin/kvmtool $(INST_SBINDIR)/
 	#perl -p -i -e "s/^VERSION=noversion/VERSION='$(VERSION).$(RELEASE)-$(REVISION)'/" $(INST_SBINDIR)/screenconfig
-	#
-	install -g root -o root -m 755 etc/udev/rules.d/99-screenconfig.rules $(INST_RULESDIR)
+	install -g root -o root -m 755 rules.d/99-screenconfig.rules $(INST_RULESDIR)
 
 package: debian-package
 debian-package:
 	debuild -uc -us
 
-debian-package-old: set-debian-release
-	git commit -asm "package build $(VERSION).$(RELEASE)-$(REVISION)"
-	git tag -a "$(VERSION).$(RELEASE)-$(REVISION)"	
-	make changelog
-	git commit -asm "package build $(VERSION).$(RELEASE)-$(REVISION)"
-	make changelog
-	dpkg-buildpackage -ai386 -rfakeroot -us -uc
-	dpkg-buildpackage -aamd64 -rfakeroot -us -uc
-	make move-packages
-	@ls -1rt ../stable/*.deb|tail -n 1
-	@ls -1rt ../unstable/*.deb|tail -n 1
-
 set-debian-release:
-	DEBEMAIL="$(USER)" dch -v "$(VERSION).$(RELEASE)-$(REVISION)" "new release"
+	dch -v "$(VERSION).$(RELEASE)-$(REVISION)" "new release"
 
 	
 increase-release:
