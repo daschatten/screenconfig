@@ -6,22 +6,24 @@ This utility is a small and simple screen configurator. It consists fo two files
 Files
 -----
 
-### screenconfig.sh
+### screenconfig
 
-'screenconfig.sh' contains the rules for the screen layout and the xrandr calls for activating it. For now you have to change this file according to your needs.
+'screenconfig' contains the rules for the screen layout and the xrandr calls for activating it. For now you have to change this file according to your needs.
 
 ### 99-screenconfig.rules
 
-For automation purposes a udev rule is included in '99-screenconfig.rules'. You generally should not change this file.
+For automation purposes a udev rule is included in '99-screenconfig.rules'. You generally should not need to change this file.
 
 Install
 -------
 
-1. Copy '99-screenconfig.rules' to '/etc/udev/rules.d/'
-2. Copy 'screenconfig.sh' to '/etc/udev/scripts/' (which may not exist, in this case create it)
-3. Set appropriate acl on 'screenconfig.sh', e.g. 'chmod 744 /etc/udev/scripts/screenconfig.sh'
-4. Modify 'screenconfig.sh' according to your needs, especially modify the 'USER' variable.
-5. Reload udev with '/etc/init.d/udev reload'
+(sorry, currently you have to edit the script in /usr/bin/)
+
+1. checkout sourcecode
+2. run make package (you need build-essentials)
+3. edit /usr/bin/screenconfig according to your needs, especcially modify the 'USER' variable
+4. reload udev: /etc/init.d/udev reload
+
 
 Example
 -------
@@ -60,6 +62,4 @@ Note
 Planned Features
 ----------------
 
-* Separate config from logic
-* Use a configuration language
-* Use a state machine
+see TODO.txt
