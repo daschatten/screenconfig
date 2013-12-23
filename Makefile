@@ -2,9 +2,6 @@
 
 SHELL	 = /bin/bash
 
-#
-# 
-#
 PNAME    = screenconfig
 PDESC    = screenconfig - automatically sets up your display layout using udev
 REPOSITORY = ispconfig.mawoh.org
@@ -22,12 +19,15 @@ SBINDIR = $(USRPREFIX)/sbin
 LIBDIR  = $(USRPREFIX)/lib/$(PNAME)
 VARLIBDIR  = /var/lib/$(PNAME)
 ETCDIR  = /etc/$(PNAME)
+RULESDIR= /etc/udev/rules.d/
 
 INST_BINDIR   = $(DESTDIR)/$(BINDIR)
 INST_SBINDIR  = $(DESTDIR)/$(SBINDIR)
 INST_LIBDIR   = $(DESTDIR)/$(LIBDIR)
 INST_VARLIBDIR= $(DESTDIR)/$(VARLIBDIR)
 INST_ETCDIR   = $(DESTDIR)/$(ETCDIR)
+INST_RULESDIR = $(DESTDIR)/$(RULESDIR)
+
 
 
 help:
@@ -36,6 +36,7 @@ help:
 	@echo "make version		shows version of program"
 	@echo "make clean		removes tmp/cache files"
 	@echo "make upload		upload .deb packages to remote debian repo and update reprepo"
+	@echo "make package		create debian package"
 
 
 build: update-version
@@ -47,6 +48,7 @@ clean:
 	rm -f debian/cron.d
 	rm -rf itmp
 	rm -rf mtmp
+	rm -rf debian/$(PNAME)
 
 
 test:
@@ -61,12 +63,17 @@ install: clean update-doc
 	#mkdir -p $(INST_BINDIR)
 	#mkdir -p $(INST_SBINDIR)
 	#mkdir -p $(INST_ETCDIR)
+	mkdir -p $(INST_RULESDIR)
 	#install -g root -o root -m 755 bin/kvmtool $(INST_SBINDIR)/
 	#perl -p -i -e "s/^VERSION=noversion/VERSION='$(VERSION).$(RELEASE)-$(REVISION)'/" $(INST_SBINDIR)/screenconfig
 	#
+	install -g root -o root -m 755 etc/udev/rules.d/99-screenconfig.rules $(INST_RULESDIR)
 
 package: debian-package
-debian-package: set-debian-release
+debian-package:
+	debuild -uc -us
+
+debian-package-old: set-debian-release
 	git commit -asm "package build $(VERSION).$(RELEASE)-$(REVISION)"
 	git tag -a "$(VERSION).$(RELEASE)-$(REVISION)"	
 	make changelog
