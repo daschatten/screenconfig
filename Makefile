@@ -61,8 +61,10 @@ update-doc:
 install: clean update-doc 
 	@echo "installing $(PNAME) $(VERSION).$(RELEASE)-$(REVISION)"
 	mkdir -p $(INST_RULESDIR)
+	mkdir -p $(INST_BINDIR)
 	#perl -p -i -e "s/^VERSION=noversion/VERSION='$(VERSION).$(RELEASE)-$(REVISION)'/" $(INST_SBINDIR)/screenconfig
-	install -g root -o root -m 755 rules.d/99-screenconfig.rules $(INST_RULESDIR)
+	install -g root -o root -m 644 rules.d/99-screenconfig.rules $(INST_RULESDIR)
+	install -g root -o root -m 755 bin/screenconfig $(INST_BINDIR)
 
 package: debian-package
 debian-package:
